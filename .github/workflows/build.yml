@@ -12,10 +12,10 @@ jobs:
 
     steps:
     - name: 1. 拉取 GitHub 程式碼
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: 2. 設定 Python 3.10 環境
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
         cache: 'pip'
@@ -34,7 +34,7 @@ jobs:
         powershell Compress-Archive -Path dist/OfflineOCR/* -DestinationPath OfflineOCR-Windows.zip
 
     - name: 6. 自動上傳並建立 GitHub Release 發布頁面
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: OfflineOCR-Windows.zip
@@ -42,7 +42,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 7. 上傳 Artifact (手動觸發時可直接在 Actions 頁面下載)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: ${{ !startsWith(github.ref, 'refs/tags/') }}
       with:
         name: OfflineOCR-Windows
