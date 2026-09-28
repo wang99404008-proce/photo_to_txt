@@ -4,11 +4,10 @@ from paddleocr import PaddleOCR
 
 class OfflineOCR:
     def __init__(self):
-        # 載入內建繁體中文與方向檢測模型 (離線模式)
+        # 移除 show_log=False 參數
         self.ocr = PaddleOCR(
             use_angle_cls=True, 
-            lang='chinese_cht',
-            show_log=False
+            lang='chinese_cht'
         )
 
     def process_image(self, img_path):
